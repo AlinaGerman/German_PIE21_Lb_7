@@ -2,6 +2,8 @@ var canvas=document.getElementById('canvas')
 var ctx=canvas.getContext('2d')
 var elements=[0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15]
 var el=[]
+var matrix=[]
+
 function mix(elements){
     for (let i=0;i<elements.length;i++){
         let id=Math.floor(Math.random()*(i+1))
@@ -9,11 +11,15 @@ function mix(elements){
         elements[i]=elements[id]
         elements[id]=current
     }
-    el[0]=elements.slice(0,4)
-    el[1]=elements.slice(4,8)
-    el[2]=elements.slice(8,12)
-    el[3]=elements.slice(12,16)
-    return el
+    for (let i=0;i<elements.length;i+=4){
+        el[i]=elements.slice(i, i+4)
+    }
+    for (let i=0;i<el.length;i++){
+        if (el[i]!=undefined){
+            matrix.push(el[i])
+        }
+    }
+    return matrix
 }
 console.log(mix(elements))
 

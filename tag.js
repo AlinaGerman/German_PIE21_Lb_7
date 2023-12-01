@@ -1,7 +1,7 @@
 var canvas=document.getElementById('canvas')
 var ctx=canvas.getContext('2d')
 var elements=[0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15]
-var el=[]
+var help_matrix=[]
 var matrix=[]
 
 function mix(elements){
@@ -12,11 +12,11 @@ function mix(elements){
         elements[id]=current
     }
     for (let i=0;i<elements.length;i+=4){
-        el[i]=elements.slice(i, i+4)
+        help_matrix[i]=elements.slice(i, i+4)
     }
-    for (let i=0;i<el.length;i++){
-        if (el[i]!=undefined){
-            matrix.push(el[i])
+    for (let i=0;i<help_matrix.length;i++){
+        if (help_matrix[i]!=undefined){
+            matrix.push(help_matrix[i])
         }
     }
     return matrix

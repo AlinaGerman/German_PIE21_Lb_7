@@ -21,7 +21,6 @@ function mix(elements){
     }
     return matrix
 }
-console.log(mix(elements))
 
 function draw_square(x, y, number){
     ctx.fillStyle='black'
@@ -42,9 +41,11 @@ function draw_square(x, y, number){
     }    
 }
 
-//draw_square(200, 200, 4)
-function draw_tag(elements){
-    for (let i=0;i<elements.length;i++){
-        
+function draw_tag(matrix){
+    for (let i=0;i<matrix.length;i++){
+        for (let j=0;j<matrix[i].length;j++){
+            draw_square(100*i, 100*j, matrix[i][j])
+        }
     }
 }
+draw_tag(matrix)

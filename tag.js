@@ -11,4 +11,21 @@ function mix(elements){
     }
     return elements
 }
-console.log(mix(elements))
+
+function draw_square(x, y, number){
+    ctx.fillStyle='black'
+    ctx.fillRect(x, y, 100, 100)
+    if (number==0){
+        ctx.fillStyle='white'
+        ctx.fillRect(x+5, y+5, 90, 90)
+    }else{
+        ctx.fillStyle='yellow'
+        ctx.fillRect(x+5, y+5, 90, 90)
+        ctx.font='60px Arial'
+        ctx.fillStyle='black'
+        ctx.fillText(number,x+35, y+70)
+    }
+    
+}
+
+draw_square(200, 200, 7)

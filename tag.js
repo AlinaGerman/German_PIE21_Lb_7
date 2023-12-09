@@ -1,8 +1,11 @@
 var canvas=document.getElementById('canvas')
+var button=document.getElementById('start')
+
 var ctx=canvas.getContext('2d')
 var elements=[0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15]
 var help_matrix=[]
 var matrix=[]
+var win_matrix=[[1,5,9,13],[2,6,10,14],[3,7,11,15],[4,8,12,0]]
 
 function mix(elements){
     let matrix=[]
@@ -39,7 +42,7 @@ function draw_square(x, y, number){
         }else{
             ctx.fillText(number, x+15, y+70)
         }
-    }    
+    }
 }
 
 function draw_tag(){
@@ -68,21 +71,33 @@ function move(x,y){
         matrix[empty[0]][empty[1]]=matrix[x][y]
         matrix[x][y]=0
     }
+    if (win()){
+        alert('win')
+    }
 }
 
 function find_click(event){
-    let column=Math.floor(event.clientX/100)
-    let line=Math.floor(event.clientY/100)
-    move(column,line)
+    let line=Math.floor(event.clientX/100)
+    let column=Math.floor(event.clientY/100)
+    move(line,column)
     draw_tag()
+    
+    
 
 }
+function win(){
+    /*if (matrix.toString()==win_matrix.toString()){
+        alert('win')
+    }*/
+    return matrix.toString()==win_matrix.toString()
+}
+function start(){
+    matrix = mix(elements)
+    draw_tag()
+}
 
-
+button.addEventListener('click', start)
 canvas.addEventListener('click', find_click)
 
-//var matrix = mix(elements)
-var matrix=[[1,5,9,13],[2,6,10,14],[3,7,11,0],[4,8,12,15]]
-console.log(matrix)
-find_positsion_empty(matrix)
+var matrix=[[1,5,9,13],[2,6,11,10],[3,7,0,14],[4,8,12,15]]
 draw_tag()

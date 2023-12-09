@@ -48,4 +48,20 @@ function draw_tag(matrix){
         }
     }
 }
-draw_tag(matrix)
+
+function find_positsion_empty(mat){
+    var positsion_empty=[]
+    for (let i=0;i<mat.length;i++){
+        for (let j=0;i<mat[i].length;j++){
+            if (mat[i][j]==0){
+                return [i, j]
+            }
+        }
+    }
+}
+
+var m = mix(elements)
+console.log(m)
+draw_tag(m)
+console.log(find_positsion_empty(m))
+

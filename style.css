@@ -1,0 +1,10 @@
+.button {
+    padding: 15px 25px;
+    text-align: center;
+    display: inline-block;
+    font-size: 16px;
+    margin: 2%;
+    cursor: pointer;
+    background-color:lawngreen;
+   
+}

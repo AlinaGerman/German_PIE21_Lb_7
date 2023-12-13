@@ -4,7 +4,8 @@ var button=document.getElementById('start')
 var ctx=canvas.getContext('2d')
 
 var win_matrix=[[1,2,3,4],[5,6,7,8],[9,10,11,12],[13,14,15,0]]
-function mix(){
+
+function mix(){ //функция перемешивает одномерный массив и составляет из него матрицу
     let elements=[0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15]
     let matrix=[]
     let help_matrix=[]
@@ -26,7 +27,7 @@ function mix(){
     return matrix
 }
 
-function draw_square(x, y, number){
+function draw_square(x, y, number){ //функция рисует квадрат с числами внутри
     ctx.fillStyle='black'
     ctx.fillRect(x, y, 100, 100)
     if (number==0){
@@ -45,7 +46,7 @@ function draw_square(x, y, number){
     }
 }
 
-function draw_tag(){
+function draw_tag(){ //функция проходится по матрице и вызывает функцию рисования квадратов
     for (let i=0;i<matrix.length;i++){
         for (let j=0;j<matrix[i].length;j++){
             draw_square(100*j, 100*i, matrix[i][j])
@@ -53,7 +54,7 @@ function draw_tag(){
     }
 }
 
-function find_positsion_empty(mat){
+function find_positsion_empty(mat){ //функция находит координаты пустого элемента
     var positsion_empty=[]
     for (let i=0;i<mat.length;i++){
         for (let j=0;j<mat[i].length;j++){
@@ -65,32 +66,33 @@ function find_positsion_empty(mat){
     }
     return positsion_empty
 }
-function move(x,y){
+function move(x,y){ //функция проверяет можно подвинуть квадрат, если можно, то меняет местами элементы в матрице
     let empty=find_positsion_empty(matrix)
     if (((empty[1]==y-1 || empty[1]==y+1) && (empty[0]==x)) || ((empty[0]==x-1 || empty[0]==x+1) && empty[1]==y)){
         matrix[empty[0]][empty[1]]=matrix[x][y]
         matrix[x][y]=0
     }
-    if (win()){
-        alert('win')
-    }
+    win()
 }
 
-function find_click(event){
+function find_click(event){ //функция наход ячецку, по которой был совершен "клик"
     let column=Math.floor(event.clientX/100)
     let line=Math.floor(event.clientY/100)
     move(line,column)
     draw_tag()
 }
 function win(){ // сделать вывод победы
-    return matrix.toString()==win_matrix.toString()
+    if (matrix.toString()==win_matrix.toString()){
+        ctx.fillStyle='white'
+        ctx.fillRect(0, 0, 400, 400)
+    }
 }
-function start(){
+function restart(){ //функция начало игры заново
     matrix = mix()
     draw_tag()
 }
 
-button.addEventListener('click', start)
+button.addEventListener('click', restart)
 canvas.addEventListener('click', find_click)
 
 var matrix=[[1,2,3,4],[5,6,7,8],[9,11,0,12],[13,10,14,15]]

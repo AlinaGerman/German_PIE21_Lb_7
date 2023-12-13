@@ -2,21 +2,30 @@ var canvas=document.getElementById('canvas')
 var button=document.getElementById('start')
 
 var ctx=canvas.getContext('2d')
-var elements=[0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15]
+//var elements=[0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15]
 var help_matrix=[]
 var matrix=[]
 var win_matrix=[[1,5,9,13],[2,6,10,14],[3,7,11,15],[4,8,12,0]]
 
-function mix(elements){
+function mix(){
+    let elements=[0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15]
     let matrix=[]
-    for (let i=0;i<elements.length;i++){
+    let mixed_elements=[]
+    /*for (let i=0;i<elements.length;i++){
         let id=Math.floor(Math.random()*(i+1))
         let current=elements[i]
         elements[i]=elements[id]
         elements[id]=current
+    }*/
+    while (elements.length>0){
+        id=(Math.floor(elements.length*Math.random()))
+        if (typeof elements[id]!=undefined){
+            mixed_elements.push(elements[id])
+        }
+        elements.splice(id,1)
     }
-    for (let i=0;i<elements.length;i+=4){
-        help_matrix[i]=elements.slice(i, i+4)
+    for (let i=0;i<mixed_elements.length;i+=4){
+        help_matrix[i]=mixed_elements.slice(i, i+4)
     }
     for (let i=0;i<help_matrix.length;i++){
         if (help_matrix[i]!=undefined){
@@ -85,14 +94,11 @@ function find_click(event){
     
 
 }
-function win(){
-    /*if (matrix.toString()==win_matrix.toString()){
-        alert('win')
-    }*/
+function win(){ // сделать вывод победы
     return matrix.toString()==win_matrix.toString()
 }
 function start(){
-    matrix = mix(elements)
+    matrix = mix()
     draw_tag()
 }
 

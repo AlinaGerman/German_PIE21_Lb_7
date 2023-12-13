@@ -52,6 +52,7 @@ function draw_tag(){ //функция проходится по матрице �
             draw_square(100*j, 100*i, matrix[i][j])
         }
     }
+    setTimeout(win, 1800)
 }
 
 function find_positsion_empty(mat){ //функция находит координаты пустого элемента
@@ -72,7 +73,7 @@ function move(x,y){ //функция проверяет можно подвин�
         matrix[empty[0]][empty[1]]=matrix[x][y]
         matrix[x][y]=0
     }
-    win()
+    
 }
 
 function find_click(event){ //функция наход ячецку, по которой был совершен "клик"
@@ -81,10 +82,13 @@ function find_click(event){ //функция наход ячецку, по ко�
     move(line,column)
     draw_tag()
 }
-function win(){ // сделать вывод победы
+function win(){ // функция выводит сообщение о победе
     if (matrix.toString()==win_matrix.toString()){
-        ctx.fillStyle='white'
-        ctx.fillRect(0, 0, 400, 400)
+        ctx.fillStyle='pink'
+        ctx.fillRect(5, 5, 390, 390)
+        ctx.font='50px Arial'
+        ctx.fillStyle='black'
+        ctx.fillText('Вы выйграли!',40, 215)
     }
 }
 function restart(){ //функция начало игры заново

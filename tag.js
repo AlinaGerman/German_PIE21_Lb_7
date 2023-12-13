@@ -3,8 +3,7 @@ var button=document.getElementById('start')
 
 var ctx=canvas.getContext('2d')
 
-var win_matrix=[[1,5,9,13],[2,6,10,14],[3,7,11,15],[4,8,12,0]]
-
+var win_matrix=[[1,2,3,4],[5,6,7,8],[9,10,11,12],[13,14,15,0]]
 function mix(){
     let elements=[0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15]
     let matrix=[]
@@ -49,7 +48,7 @@ function draw_square(x, y, number){
 function draw_tag(){
     for (let i=0;i<matrix.length;i++){
         for (let j=0;j<matrix[i].length;j++){
-            draw_square(100*i, 100*j, matrix[i][j])
+            draw_square(100*j, 100*i, matrix[i][j])
         }
     }
 }
@@ -78,13 +77,10 @@ function move(x,y){
 }
 
 function find_click(event){
-    let line=Math.floor(event.clientX/100)
-    let column=Math.floor(event.clientY/100)
+    let column=Math.floor(event.clientX/100)
+    let line=Math.floor(event.clientY/100)
     move(line,column)
     draw_tag()
-    
-    
-
 }
 function win(){ // сделать вывод победы
     return matrix.toString()==win_matrix.toString()
@@ -97,5 +93,5 @@ function start(){
 button.addEventListener('click', start)
 canvas.addEventListener('click', find_click)
 
-var matrix=[[1,5,9,13],[2,6,11,10],[3,7,0,14],[4,8,12,15]]
+var matrix=[[1,2,3,4],[5,6,7,8],[9,11,0,12],[13,10,14,15]]
 draw_tag()

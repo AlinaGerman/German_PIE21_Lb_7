@@ -2,26 +2,18 @@ var canvas=document.getElementById('canvas')
 var button=document.getElementById('start')
 
 var ctx=canvas.getContext('2d')
-//var elements=[0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15]
-var help_matrix=[]
-var matrix=[]
+
 var win_matrix=[[1,5,9,13],[2,6,10,14],[3,7,11,15],[4,8,12,0]]
 
 function mix(){
     let elements=[0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15]
     let matrix=[]
+    let help_matrix=[]
     let mixed_elements=[]
-    /*for (let i=0;i<elements.length;i++){
-        let id=Math.floor(Math.random()*(i+1))
-        let current=elements[i]
-        elements[i]=elements[id]
-        elements[id]=current
-    }*/
+    
     while (elements.length>0){
         id=(Math.floor(elements.length*Math.random()))
-        if (typeof elements[id]!=undefined){
-            mixed_elements.push(elements[id])
-        }
+        mixed_elements.push(elements[id])
         elements.splice(id,1)
     }
     for (let i=0;i<mixed_elements.length;i+=4){
@@ -42,7 +34,7 @@ function draw_square(x, y, number){
         ctx.fillStyle='white'
         ctx.fillRect(x+5, y+5, 90, 90)
     }else{
-        ctx.fillStyle='yellow'
+        ctx.fillStyle='paleturquoise'   //lightblue lightcyan paleturquoise
         ctx.fillRect(x+5, y+5, 90, 90)
         ctx.font='60px Arial'
         ctx.fillStyle='black'

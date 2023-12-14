@@ -52,7 +52,7 @@ function draw_tag(){ //функция проходится по матрице �
             draw_square(100*j, 100*i, matrix[i][j])
         }
     }
-    setTimeout(win, 1800)
+    setTimeout(win, 1500)
 }
 
 function find_positsion_empty(mat){ //функция находит координаты пустого элемента
@@ -73,17 +73,17 @@ function move(x,y){ //функция проверяет можно подвин�
         matrix[empty[0]][empty[1]]=matrix[x][y]
         matrix[x][y]=0
     }
-    
 }
 
 function find_click(event){ //функция наход ячецку, по которой был совершен "клик"
-    let column=Math.floor(event.clientX/100)
     let line=Math.floor(event.clientY/100)
+    let column=Math.floor(event.clientX/100)
     move(line,column)
     draw_tag()
 }
 function win(){ // функция выводит сообщение о победе
     if (matrix.toString()==win_matrix.toString()){
+        ctx.clearRect(5, 5, 90, 90)
         ctx.fillStyle='pink'
         ctx.fillRect(5, 5, 390, 390)
         ctx.font='50px Arial'
@@ -91,13 +91,12 @@ function win(){ // функция выводит сообщение о побе�
         ctx.fillText('Вы выйграли!',40, 215)
     }
 }
-function restart(){ //функция начало игры заново
+function start(){ //функция начала игры
     matrix = mix()
     draw_tag()
 }
 
-button.addEventListener('click', restart)
+button.addEventListener('click', start)
 canvas.addEventListener('click', find_click)
 
-var matrix=[[1,2,3,4],[5,6,7,8],[9,11,0,12],[13,10,14,15]]
-draw_tag()
+restart()

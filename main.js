@@ -1,6 +1,7 @@
 var canvas=document.getElementById('canvas');
 var button=document.getElementById('start');
 var ctx=canvas.getContext('2d');
+
 var win_matrix=[[1,2,3,4],[5,6,7,8],[9,10,11,12],[13,14,15,0]];
 
 function mix(){ //функция перемешивает одномерный массив и составляет из него матрицу
@@ -21,7 +22,7 @@ function mix(){ //функция перемешивает одномерный �
     return matrix;
 }
 
-function draw_square(x, y, number){ //функция рисует квадрат с числами внутри
+function draw_square(x, y, number){ //функция рисует квадрат с числом внутри
     ctx.fillStyle='black';
     ctx.fillRect(x, y, 100, 100);
     if (number==0){
@@ -61,7 +62,6 @@ function find_position_empty(matr){ //функция находит коорди
     }
     return position_empty;
 }
-
 function move(x,y){ //функция проверяет можно подвинуть квадрат, если можно, то меняет местами элементы в матрице
     let empty=find_position_empty(matrix);
     if (((empty.y==y-1 || empty.y==y+1) && empty.x==x) || ((empty.x==x-1 || empty.x==x+1) && empty.y==y)){
@@ -77,7 +77,6 @@ function find_click(event){ //функция наход ячецку, по ко�
     move(line,column);
     draw_tag();
 }
-
 function win(){ // функция выводит сообщение о победе
     if (matrix.toString()==win_matrix.toString()){
         ctx.clearRect(5, 5, 90, 90);
@@ -88,7 +87,6 @@ function win(){ // функция выводит сообщение о побе�
         ctx.fillText('Вы выиграли!',40, 215);
     }
 }
-
 function restart(){ //функция начала игры заново
     matrix = mix();
     draw_tag();

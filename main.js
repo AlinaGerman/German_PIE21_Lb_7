@@ -1,8 +1,6 @@
 var canvas=document.getElementById('canvas');
 var button=document.getElementById('start');
-
 var ctx=canvas.getContext('2d');
-
 var win_matrix=[[1,2,3,4],[5,6,7,8],[9,10,11,12],[13,14,15,0]];
 
 function mix(){ //функция перемешивает одномерный массив и составляет из него матрицу
@@ -11,7 +9,7 @@ function mix(){ //функция перемешивает одномерный �
     let mixed_elements=[];
     
     while (elements.length>0){
-        id=(Math.floor(elements.length*Math.random()));
+        id=Math.floor(elements.length*Math.random());
         mixed_elements.push(elements[id]);
         elements.splice(id,1);
     }
@@ -51,21 +49,22 @@ function draw_tag(){ //функция проходится по матрице �
     setTimeout(win, 1500);
 }
 
-function find_positsion_empty(matr){ //функция находит координаты пустого элемента
-    let positsion_empty={};
+function find_position_empty(matr){ //функция находит координаты пустого элемента
+    let position_empty={};
     for (let i=0;i<matr.length;i++){
         for (let j=0;j<matr[i].length;j++){
             if (matr[i][j]==0){
-                positsion_empty.x=i;
-                positsion_empty.y=j;
+                position_empty.x=i;
+                position_empty.y=j;
             }
         }
     }
-    return positsion_empty;
+    return position_empty;
 }
+
 function move(x,y){ //функция проверяет можно подвинуть квадрат, если можно, то меняет местами элементы в матрице
-    let empty=find_positsion_empty(matrix);
-    if (((empty.y==y-1 || empty.y==y+1) && (empty.x==x)) || ((empty.x==x-1 || empty.x==x+1) && empty.y==y)){
+    let empty=find_position_empty(matrix);
+    if (((empty.y==y-1 || empty.y==y+1) && empty.x==x) || ((empty.x==x-1 || empty.x==x+1) && empty.y==y)){
         matrix[empty.x][empty.y]=matrix[x][y];
         matrix[x][y]=0;
     }
@@ -78,6 +77,7 @@ function find_click(event){ //функция наход ячецку, по ко�
     move(line,column);
     draw_tag();
 }
+
 function win(){ // функция выводит сообщение о победе
     if (matrix.toString()==win_matrix.toString()){
         ctx.clearRect(5, 5, 90, 90);
@@ -85,15 +85,17 @@ function win(){ // функция выводит сообщение о побе�
         ctx.fillRect(5, 5, 390, 390);
         ctx.font='50px Arial';
         ctx.fillStyle='black';
-        ctx.fillText('Вы выйграли!',40, 215);
+        ctx.fillText('Вы выиграли!',40, 215);
     }
 }
-function start(){ //функция начала игры заново
+
+function restart(){ //функция начала игры заново
     matrix = mix();
     draw_tag();
 }
 
-button.addEventListener('click', start);
+button.addEventListener('click', restart);
 canvas.addEventListener('click', find_click);
 
-start();
+var matrix=[[1,2,3,4],[5,6,7,8],[9,11,0,12],[13,10,14,15]];
+draw_tag();

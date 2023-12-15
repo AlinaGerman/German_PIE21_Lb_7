@@ -71,7 +71,7 @@ function move(x,y){ //функция проверяет можно подвин�
     return matrix;
 }
 
-function find_click(event){ //функция наход ячецку, по которой был совершен "клик"
+function find_click(event){ //функция находит ячецку, по которой был совершен "клик"
     let line=Math.floor(event.clientY/100);
     let column=Math.floor(event.clientX/100);
     move(line,column);
@@ -84,7 +84,7 @@ function win(){ // функция выводит сообщение о побе�
         ctx.fillRect(5, 5, 390, 390);
         ctx.font='50px Arial';
         ctx.fillStyle='black';
-        ctx.fillText('Вы выиграли!',40, 215);
+        ctx.fillText('Вы выиграли!', 40, 215);
     }
 }
 function restart(){ //функция начала игры заново
